@@ -7,12 +7,6 @@ function Sidebar() {
           <p>Home</p>
         </div>
         <div>
-          <img src="./src/assets/search.png" alt="Search icon" />
-          <p>Search</p>
-        </div>
-      </div>
-      <div>
-        <div>
           <img src="./src/assets/library.png" alt="Library icon" />
           <p>My Library</p>
         </div>
