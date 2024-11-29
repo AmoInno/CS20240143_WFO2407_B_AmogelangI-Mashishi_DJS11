@@ -11,3 +11,12 @@ html {
   margin: 0;
   padding: 0;
 }
+
+:root {
+  --primaryDark: #212930;
+  --primaryLight: #fffeeb;
+  --accentColor: #dba11a;
+  --secondaryDark: #306b34;
+  --secondaryLight: #429ea6;
+  --hoverColor: rgba(219, 161, 26, 0.1);
+}
