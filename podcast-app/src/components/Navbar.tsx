@@ -8,13 +8,13 @@ function Navbar() {
   return (
     <div className="flex w-full h-full p-5 justify-between items-center shadow-lg bg-[var(--primaryLight)]">
       {/* Hamburger menu */}
-      <div className="flex justify-center items-center gap-20 w-1/4">
+      <div className="flex justify-center items-center gap-16 w-1/6 mx-8">
         <MenuRoundedIcon
           className="cursor-pointer "
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
         <div
-          className={`absolute start-1 top-28  h-screen w-60 bg-[var(--primaryLight)] z-50 ${
+          className={`absolute start-1 top-24  h-screen w-56 bg-[var(--primaryLight)] z-50 ${
             isMenuOpen ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -40,18 +40,23 @@ function Navbar() {
           <img
             src="./src/assets/logo-2.png"
             alt="podcast logo"
-            className="max-w-24 hover:scale-105 transition-all "
+            className="max-w-24 hover:scale-105 transition-all  ml-4"
           />
         </div>
       </div>
-      <div className="flex items-center gap-5 relative justify-center w-2/4">
-        <div className="flex items-center relative w-full">
-          <SearchIcon className="absolute left-3 text-2xl text-gray" />
+      <div className="items-center gap-5 w-4/6">
+        <div className="flex items-center relative justify-between gap-10 w-full">
+          <SearchIcon className="absolute left-3 text-3xl text-gray" />
           <input
             type="text"
             placeholder=" Search"
             className="w-full py-3 pl-12 rounded-3xl border-2 border-orange-200  focus:outline-[var(--accentColor)] "
           />
+          <div>
+            <p className="bg-[var(--secondaryLight)] text-white px-4 py-1 rounded-full w-12 h-12 flex justify-center items-center">
+              A
+            </p>
+          </div>
         </div>
       </div>
     </div>

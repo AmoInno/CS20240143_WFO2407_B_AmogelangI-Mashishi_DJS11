@@ -2,7 +2,7 @@ import { IconData } from "./IconData";
 
 function Sidebar() {
   return (
-    <div className="mt-4 w-28 h-screen shadow-lg">
+    <div className=" w-28 h-screen shadow-lg">
       <ul>
         {IconData.map((value, key) => {
           // Makes a list of each item in the array & displays the title and the icon in the browser
