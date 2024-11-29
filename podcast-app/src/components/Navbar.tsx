@@ -10,7 +10,7 @@ function Navbar() {
       {/* Hamburger menu */}
       <div className="flex justify-center items-center gap-20 w-1/4">
         <MenuRoundedIcon
-          className="cursor-pointer"
+          className="cursor-pointer "
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
         <div
