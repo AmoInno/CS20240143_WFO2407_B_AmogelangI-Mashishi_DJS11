@@ -2,19 +2,22 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useState } from "react";
 import { IconData } from "./IconData";
+import { useNavigate } from "react-router-dom";
+
 function Navbar() {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex w-full h-full p-5 justify-between items-center shadow-lg bg-[var(--primaryLight)]">
+    <div className="flex w-full p-3 justify-between items-center shadow-lg bg-[var(--primaryLight)] z-40 fixed top-0 left-0 w-full ">
       {/* Hamburger menu */}
-      <div className="flex justify-center items-center gap-16 w-1/6 mx-8">
+      <div className="flex justify-between items-center w-full sm:w-1/6 mx-8">
         <MenuRoundedIcon
           className="cursor-pointer "
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
         <div
-          className={`absolute start-1 top-24  h-screen w-56 bg-[var(--primaryLight)] z-50 ${
+          className={`absolute top-24  h-screen w-56 bg-[var(--primaryLight)] ${
             isMenuOpen ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -25,11 +28,11 @@ function Navbar() {
                 className="list-none"
                 key={key}
                 onClick={() => {
-                  window.location.pathname = value.link; // When you click on each list item, it will change to the its specific location
+                  navigate(value.link); // When you click on each list item, it will change to the its specific location
                 }}
               >
-                <div className="flex flex-col items-center mb-5 p-2  hover:bg-[var(--hoverColor)] cursor-pointer">
-                  <div className="size-7 ">{value.icon}</div>
+                <div className="flex flex-col items-center mb-5  hover:bg-[var(--secondaryLight)] cursor-pointer transition-all duration-300 ease-in-out">
+                  <div className="text-3xl">{value.icon}</div>
                   <div className="text-xs">{value.title}</div>
                 </div>
               </li>
@@ -40,13 +43,13 @@ function Navbar() {
           <img
             src="./src/assets/logo-2.png"
             alt="podcast logo"
-            className="max-w-24 hover:scale-105 transition-all  ml-4"
+            className="hidden md:block max-w-24 hover:scale-105 transition-all  ml-4"
           />
         </div>
       </div>
-      <div className="items-center gap-5 w-4/6">
+      <div className="flex items-center gap-5 w-4/6 justify-end">
         <div className="flex items-center relative justify-between gap-10 w-full">
-          <SearchIcon className="absolute left-3 text-3xl text-gray" />
+          <SearchIcon className="absolute left-3 text-3xl text-gray-500" />
           <input
             type="text"
             placeholder=" Search"

@@ -1,48 +1,27 @@
-import { useState, useEffect } from "react";
-import { Preview } from "./interfaces";
+import FetchData from "./FetchData";
+import { Podcast } from "./interfaces";
+import { useState } from "react";
+import PodcastsIcon from "@mui/icons-material/Podcasts";
+import PodcastCard from "./PodcastCard";
 
 function PodcastPreview() {
-  const [preview, setPreview] = useState<Preview[]>([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://podcast-api.netlify.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data! Reload and try again.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPreview(data);
-        setLoading(false); // After loading and updating the data, loading stops
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false); // Loading stops when error occurs
-      });
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-
-  if (error) return <p>{error}</p>;
+  const [podcasts, setPodcast] = useState<Podcast[]>([]);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ml-28">
-        {preview.map((preview) => (
-          <div
-            key={preview.id}
-            className="p-4 border rounded shadow-xl m-8 hover:scale-125 ease-in-out duration-300  "
-          >
-            <h3 className="text-xl font-bold pb-2.5">{preview.title}</h3>
-            <img src={preview.image} alt={preview.title} />
-            <p className="text-sm text-[var(--primaryDark)] mt-2">
-              Seasons: {preview.seasons}
-            </p>
-          </div>
-        ))}
+    <div className="flex-1 ml-10 md:ml-28 pt-24 px-5 justify-center">
+      <div className="flex text-[var(--secondaryDark)] text-center font-bold justify-center gap-2 text-2xl">
+        <h1 className="text-2xl md:text-3xl">Available Podcasts</h1>
+        <div>
+          <PodcastsIcon />
+        </div>
+      </div>
+
+      <FetchData
+        endpoint="https://podcast-api.netlify.app/"
+        onDataFetched={setPodcast}
+      />
+      <div>
+        <PodcastCard podcasts={podcasts} />
       </div>
     </div>
   );
