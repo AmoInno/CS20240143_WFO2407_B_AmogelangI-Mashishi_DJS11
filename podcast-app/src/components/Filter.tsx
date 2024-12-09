@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SortIcon from "@mui/icons-material/Sort";
+
 interface SortOption {
   sort: (option: string) => void; // Replace `string` with the actual type of `sort`
 }
@@ -19,18 +21,20 @@ function Filter({ sort }: SortOption) {
 
   return (
     <div>
-      <label htmlFor="sort-filter">Filter</label>
+      <label htmlFor="sort-filter">
+        Sort
+        <SortIcon />
+      </label>
       <select
         name="sort-filter"
         id="sort-filter"
         value={selectFilter}
         onChange={handleSortChange}
       >
-        <option value=""></option>
-        <option value="A-Z"></option>
-        <option value="Z-A"></option>
-        <option value="newest"></option>
-        <option value="oldest"></option>
+        <option value="A-Z">A-Z</option>
+        <option value="Z-A">Z-A</option>
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
       </select>
     </div>
   );
