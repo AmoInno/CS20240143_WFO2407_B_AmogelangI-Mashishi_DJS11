@@ -1,0 +1,54 @@
+import { useState } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
+import FetchData from "./FetchData";
+
+interface PodcastPreview {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const genreTitles: Record<number, string> = {
+  1: "Personal Growth",
+  2: "Investigative Journalism",
+  3: "History",
+  4: "Comedy",
+  5: "Entertainment",
+  6: "Business",
+  7: "Fiction",
+  8: "News",
+  9: "Kids and Family",
+};
+
+function GenrePage() {
+  const { id } = useParams<{ id: string }>(); // Get the genre ID from the URL
+  const [podcasts, setPodcasts] = useState<PodcastPreview[]>([]);
+
+  const handleDataFetched = (data: { podcasts: PodcastPreview[] }) => {
+    setPodcasts(data.podcasts || []);
+  };
+
+  const genreTitle = genreTitles[Number(id)] || "Podcasts"; // Get the genre title from the predefined list
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-4">{genreTitle}</h1>
+
+      <FetchData
+        endpoint={`https://podcast-api.netlify.app/genre/${id}`}
+        onDataFetched={handleDataFetched}
+      />
+
+      {/* Render podcasts */}
+      <ul className="space-y-4">
+        {podcasts.map((podcast) => (
+          <li key={podcast.id} className="border p-4 rounded shadow">
+            <h2 className="text-lg font-semibold">{podcast.title}</h2>
+            <p className="text-gray-600">{podcast.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

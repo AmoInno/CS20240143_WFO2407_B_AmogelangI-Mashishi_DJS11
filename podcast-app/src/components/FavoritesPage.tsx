@@ -4,33 +4,39 @@ function FavoritesPage() {
   const { favorites, removeFromFavorites } = useFavorites();
 
   return (
-    <div className="flex-1 ml-10 md:ml-28 pt-24 px-5 justify-center">
-      <h1 className="text-2xl font-bold mb-4">Your Favorites</h1>
+    <div className="flex-1 mr-4 p-6 justify-center">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+        Your Favorites
+      </h1>
       {favorites.length > 0 ? (
         <ul className="space-y-6">
           {favorites.map((podcast) => (
             <li
               key={podcast.id}
-              className="p-4 rounded-lg shadow-lg flex flex-col items-center"
+              className="p-8 rounded-lg shadow-lg flex flex-col bg-[var(--primaryLight)] hover:shadow-xl transition-shadow duration-300"
             >
-              <h2 className="text-xl font-semibold">{podcast.title}</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl md:text-2xl font-semibold">
+                  {podcast.title}
+                </h2>
+                <button
+                  onClick={() => removeFromFavorites(podcast.id)}
+                  className="px-4 py-2 bg-[var(--secondaryLight)] text-gray-600 rounded-md hover:bg-red-600"
+                >
+                  Remove from Favorites
+                </button>
+              </div>
               <img
                 src={podcast.image}
                 alt={podcast.title}
-                className="w-48 h-48 object-cover rounded-md my-4"
+                className="m-10 w-full max-w-xs h-auto object-cover rounded-md self-center"
               />
               <p className="text-gray-600 mb-4">{podcast.description}</p>
-              <button
-                onClick={() => removeFromFavorites(podcast.id)}
-                className=" mb-5 px-4 py-2 bg-[var(--secondaryLight)] text-gray-600 rounded-md hover:bg-red-600"
-              >
-                Remove from Favorites
-              </button>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="text-gray-500">No favorites yet.</p>
+        <p className="text-gray-500 text-center text-lg">No favorites yet.</p>
       )}
     </div>
   );

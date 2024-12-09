@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 interface Podcast {
   id: string;
   title: string;
@@ -6,7 +7,7 @@ interface Podcast {
   description: string;
 }
 
-function Favorites() {
+function useFavorites() {
   const [favorites, setFavorites] = useState<Podcast[]>(() => {
     // Load favorites from localStorage (if available)
     const storedFavorites = localStorage.getItem("favorites");
@@ -30,4 +31,5 @@ function Favorites() {
 
   return { favorites, addToFavorites, removeFromFavorites };
 }
-export default Favorites;
+
+export default useFavorites;

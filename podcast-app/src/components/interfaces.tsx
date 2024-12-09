@@ -22,7 +22,6 @@ export interface GenreData {
 
 export interface GenreListProps {
   genres: Record<number, string>;
-  onGenreClick: (id: number) => void;
 }
 
 export interface PodcastCardProps {

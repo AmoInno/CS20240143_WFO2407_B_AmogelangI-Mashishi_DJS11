@@ -1,4 +1,5 @@
 import { GenreListProps } from "./interfaces";
+import { useNavigate } from "react-router-dom";
 
 const genreTitles: Record<number, string> = {
   1: "Personal Growth",
@@ -11,15 +12,18 @@ const genreTitles: Record<number, string> = {
   8: "News",
   9: "Kids and Family",
 };
-function GenreList({ genres, onGenreClick }: GenreListProps) {
+
+function GenreList({ genres }: GenreListProps) {
+  const navigate = useNavigate();
+
   return (
     <div>
-      <ul>
+      <ul className="flex flex-wrap gap-4">
         {Object.entries(genres).map(([id, title]) => (
           <li key={id}>
             <button
-              onClick={() => onGenreClick(Number(id))}
-              className="text-blue-500 hover:underline"
+              onClick={() => navigate(`/genre/${id}`)}
+              className="p-4 rounded-full text-white bg-[var(--primaryDark)] hover:bg-[var(--primaryLight)] hover:text-black"
             >
               {title}
             </button>
