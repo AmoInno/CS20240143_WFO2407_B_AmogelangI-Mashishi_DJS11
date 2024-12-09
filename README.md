@@ -1,6 +1,24 @@
 🎵 PODCAST APP | PORTFOLIO PIECE 💿
 [DJS11] Starter Instructions for the Final Portfolio Piece Submission 🚀
 
+Setup Instructions
+
+To set up the project locally, follow these steps:
+
+Clone the repository:
+
+git clone
+Install dependencies:
+
+npm install
+Start the development server:
+npm install
+
+npm start
+Build for production:
+
+npm run build
+
 Table of Contents
 
 🤖 Technology
@@ -10,9 +28,6 @@ Endpoints
 Genre Titles
 🧑 User Stories
 🤖 Technology
-You will be required to complete this project using React and a build-process to manage all the complexity involved.
-
-You are welcome to use any other technology that you are comfortable with as well as React. It is recommended that you use TypeScript as well, however you are welcome to avoid TypeScript entirely if you do not feel comfortable with it’s usage just yet.
 
 📦Data
 Data consists of three basic semantic units
@@ -24,12 +39,6 @@ However, the following information is also exposed via the API
 
 PREVIEW: A summarised version of a SHOW that only contains basic information. Usually exposed when an array of different SHOW information is requested.
 GENRE: Information related to a (one of many) genres that can be assigned to a SHOW
-Relationships
-The following chart indicates the relations between units of data. It uses Entity Relationship mapping. In order to understand the meaning of symbols in the chart please read the overview on the Mermaid.js documentation.
-
-Note that the text between the units indicates what properties map to one another. It is separated by means of three underscores (\_\_\_). The value before the underscores is the mapping from the parent object, whereas the values after the underscore is the mapping from the child object.
-
-Note that is some cases there is no way to infer the parent from the child itself , in those cases just the parent map is noted, with no value after the underscores.
 
 Endpoints
 Data can be called via a fetch request to the following three endpoints. Note that there is not always a one-to-one mapping between endpoints and actual data structures. Also note that <ID> indicates where the dynamic ID for the requested item should be placed. For example: [https://podcast-api.netlify.app/genre/3](https://podcast-api.netlify.app/genre/3)
@@ -51,5 +60,3 @@ ID Title
 7 Fiction
 8 News
 9 Kids and Family
-🧑 User Stories
-Please refer to the DJS rubric found in your dashboard spreadsheet for more detail.
