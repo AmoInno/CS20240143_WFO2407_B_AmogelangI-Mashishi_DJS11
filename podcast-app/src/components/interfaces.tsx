@@ -27,3 +27,14 @@ export interface GenreListProps {
 export interface PodcastCardProps {
   podcasts: Podcast[];
 }
+
+export interface PodcastPreview {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface FilterProps {
+  podcasts: Podcast[];
+}

@@ -1,16 +1,15 @@
 import { useParams } from "react-router-dom";
 import FetchData from "./FetchData";
 import { useState } from "react";
-import Favorites from "./Favourites";
 function DisplayPodcast() {
   const { id } = useParams(); // Get the podcast ID from the URL
   const [podcastData, setPodcastData] = useState<any>(null);
   const handleDataFeteched = (data: any) => {
-    setPodcastData(data); // recieves data from FetchData
+    setPodcastData(data); // recieves data from Fetch Data component
   };
 
   return (
-    <div className="flex-1 ml-10 md:ml-28 pt-24 px-5 justify-center">
+    <div className="flex-1 px-5 justify-center">
       <FetchData
         endpoint={`https://podcast-api.netlify.app/id/${id}`}
         onDataFetched={handleDataFeteched}

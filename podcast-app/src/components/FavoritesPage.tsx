@@ -1,16 +1,34 @@
 import useFavorites from "./Favourites";
+import { SortOption } from "./App";
+import { useState, useEffect } from "react";
+import { sortPodcasts } from "./FilterFunction";
+import Filter from "./Filter";
 
 function FavoritesPage() {
   const { favorites, removeFromFavorites } = useFavorites();
+  const [sortOption, setSortOption] = useState<SortOption>("A-Z"); // Keep track of selected sorting state; Default is set to "A-Z"
+  const [sortedFavorites, setSortedFavorites] = useState(favorites);
+
+  // Re-sorts the favorites list whenever favorites or sortOption changes
+  useEffect(() => {
+    setSortedFavorites(sortPodcasts(favorites, sortOption));
+  }, [favorites, sortOption]);
+
+  const handleSortChange = (option: SortOption) => {
+    setSortOption(option); // Update the sort option
+  };
 
   return (
     <div className="flex-1 mr-4 p-6 justify-center">
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center">
-        Your Favorites
-      </h1>
-      {favorites.length > 0 ? (
+      <div className="flex justify-between items-center mb-3">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 text-center">
+          Your Favorites
+        </h1>
+        <Filter sort={handleSortChange} selectedFilter={sortOption} />
+      </div>
+      {sortedFavorites.length > 0 ? (
         <ul className="space-y-6">
-          {favorites.map((podcast) => (
+          {sortedFavorites.map((podcast) => (
             <li
               key={podcast.id}
               className="p-8 rounded-lg shadow-lg flex flex-col bg-[var(--primaryLight)] hover:shadow-xl transition-shadow duration-300"

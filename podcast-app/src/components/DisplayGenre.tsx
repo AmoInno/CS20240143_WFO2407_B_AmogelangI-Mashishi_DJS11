@@ -1,7 +1,10 @@
 import FetchData from "./FetchData";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Podcast } from "./interfaces";
 import PodcastCard from "./PodcastCard";
+import Filter from "./Filter";
+import { SortOption } from "./App";
+import { sortPodcasts } from "./FilterFunction";
 
 const genreTitles: Record<number, string> = {
   1: "Personal Growth",
@@ -15,31 +18,50 @@ const genreTitles: Record<number, string> = {
   9: "Kids and Family",
 };
 
-function DisplayGenre() {
-  const [podcasts, setPodcast] = useState<Podcast[]>([]);
+interface DisplayGenreProps {
+  sortOption: SortOption;
+  handleSortChange: (option: SortOption) => void;
+}
+
+function DisplayGenre({ sortOption, handleSortChange }: DisplayGenreProps) {
+  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
   const [selectGenre, setSelectGenre] = useState<number | null>(null);
 
   // Group podcasts by genre
-  const groupedPodcasts = podcasts.reduce<Record<number, Podcast[]>>(
-    (acc, podcast) => {
-      podcast.genres.forEach((genreId) => {
-        if (!acc[genreId]) {
-          acc[genreId] = [];
-        }
-        acc[genreId].push(podcast);
-      });
-      return acc;
-    },
-    {}
-  );
+  const groupedPodcasts = useMemo(() => {
+    const grouped = podcasts.reduce<Record<number, Podcast[]>>(
+      (acc, podcast) => {
+        podcast.genres.forEach((genreId) => {
+          if (!acc[genreId]) {
+            acc[genreId] = []; // if genre doesn't exist,create an empty array for that genre
+          }
+          acc[genreId].push(podcast); // if it exists, add the podcast to the existing array for that genre
+        });
+        return acc;
+      },
+      {}
+    );
+
+    // Sort podcasts in each genre
+    Object.keys(grouped).forEach((genreId) => {
+      grouped[Number(genreId)] = sortPodcasts(
+        grouped[Number(genreId)],
+        sortOption
+      );
+    });
+
+    return grouped;
+  }, [podcasts, sortOption]);
 
   return (
-    <div className="flex-1 ml-28 pt-24 px-5 justify-center">
+    <div className="flex-1 px-5 justify-center">
       <FetchData
         endpoint="https://podcast-api.netlify.app"
-        onDataFetched={setPodcast}
+        onDataFetched={setPodcasts}
       />
-
+      <div className="flex justify-end items-center pt-5">
+        <Filter sort={handleSortChange} selectedFilter={sortOption} />
+      </div>
       <div>
         {selectGenre !== null ? (
           <>
@@ -65,7 +87,7 @@ function DisplayGenre() {
                 {genreTitles[Number(genreId)]}
               </h2>
               <div className="mb-5">
-                <PodcastCard podcasts={podcasts} />
+                <PodcastCard podcasts={genrePodcasts} />
               </div>
             </div>
           ))
