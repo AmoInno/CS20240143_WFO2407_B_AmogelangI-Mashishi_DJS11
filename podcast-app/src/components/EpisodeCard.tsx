@@ -5,6 +5,7 @@ interface EpisodeCardProps {
   podcast?: Podcast;
   season?: Season;
   episode?: Episode;
+  onAddToFavorites: (episode: Episode) => void;
   onPlay: (episode: Episode) => void;
 }
 
@@ -12,6 +13,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({
   podcast,
   season,
   episode,
+  onAddToFavorites,
   onPlay,
 }) => {
   const [isFav, setIsFav] = useState<boolean>(false);
@@ -64,7 +66,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({
         </div>
         <div className="flex items-center mt-4 sm:mt-0">
           <button
-            onClick={handleToggleFavorite}
+            onClick={() => onAddToFavorites(episode)}
             className={`flex items-center ${
               isFav
                 ? "bg-red-600 font-semibold"
