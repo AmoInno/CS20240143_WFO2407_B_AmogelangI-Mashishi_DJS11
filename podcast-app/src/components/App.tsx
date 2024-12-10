@@ -6,7 +6,6 @@ import DisplayGenre from "./DisplayGenre";
 import FavoritesPage from "./FavoritesPage";
 import { useState } from "react";
 import { sortPodcasts } from "./FilterFunction";
-import Player from "./Player";
 import PodcastInfo from "./DisplayPodcast";
 
 interface FilteringPodcasts {
@@ -32,7 +31,6 @@ function App() {
       <Sidebar />
 
       <div className="pt-24 pl-[90px] md:pl-[125px] lg:pl-[130px]">
-        <Player />
         <Routes>
           <Route
             path="/"

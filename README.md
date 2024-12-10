@@ -19,17 +19,22 @@ Build for production:
 
 npm run build
 
-Table of Contents
+# Features
 
-🤖 Technology
-📦Data
-Relationships
-Endpoints
-Genre Titles
-🧑 User Stories
-🤖 Technology
+Podcast List: View a list of podcasts and their details.
+Favorites: Mark episodes as favorites.
+Description Toggle: Show or hide full episode descriptions.
+Sorting: Sort podcasts alphabetically or by genre.
+Play: Play podcast episodes (to be implemented).
 
 [My App](https://chatterchat-podcasts.netlify.app)
+
+# Built With
+
+React - JavaScript library for building user interfaces.
+Vite - Fast build tool.
+TypeScript - Superset of JavaScript that adds static types.
+Tailwind CSS - Utility-first CSS framework for styling.
 
 📦Data
 Data consists of three basic semantic units
@@ -64,3 +69,7 @@ Since genre information is only exposed on PREVIEW by means of the specific GENR
 7 Fiction
 8 News
 9 Kids and Family
+
+# Contributions
+
+Contributions are welcome! Feel free to fork the repository, make changes, and submit pull requests.

@@ -14,17 +14,10 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({
   season,
   episode,
   onAddToFavorites,
-  onPlay,
 }) => {
   const [isFav, setIsFav] = useState<boolean>(false);
   const [showFullDescription, setShowFullDescription] =
     useState<boolean>(false);
-
-  const handlePlay = () => {
-    if (episode) {
-      onPlay(episode);
-    }
-  };
 
   const handleToggleFavorite = () => {
     setIsFav((prevIsFav) => !prevIsFav); // Toggle the favorite state
@@ -66,7 +59,10 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({
         </div>
         <div className="flex items-center mt-4 sm:mt-0">
           <button
-            onClick={() => onAddToFavorites(episode)}
+            onClick={() => {
+              handleToggleFavorite(); // Toggle favorite state
+              onAddToFavorites(episode); // Call the passed function to add to favorites
+            }}
             className={`flex items-center ${
               isFav
                 ? "bg-red-600 font-semibold"
@@ -85,6 +81,12 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({
         >
           {episode.description}
         </p>
+        <button
+          onClick={toggleDescription} // Toggle the description visibility
+          className="text-[var(--accentColor)] mt-2"
+        >
+          {showFullDescription ? "Show Less" : "Show More"}
+        </button>
       </div>
     </div>
   );

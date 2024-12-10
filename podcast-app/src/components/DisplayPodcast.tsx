@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Use react-router-dom for route parameters
 import EpisodeCard from "./EpisodeCard";
 import { PodcastData, Episode, Season } from "./interfaces";
+import useFavorites from "./Favourites";
 
 const PodcastInfo: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Get the podcast ID from URL
   const [podcastData, setPodcastData] = useState<PodcastData | null>(null);
+  const { favorites, addToFavorites } = useFavorites();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedSeason, setSelectedSeason] = useState<Season | null>(null);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
-  const [audioPlayerVisible, setAudioPlayerVisible] = useState(false);
 
   useEffect(() => {
     const fetchPodcastData = async () => {
@@ -40,9 +41,8 @@ const PodcastInfo: React.FC = () => {
     fetchPodcastData();
   }, [id]);
 
-  const handleEpisodePlay = (episode: Episode) => {
-    setSelectedEpisode(episode);
-    setAudioPlayerVisible(true);
+  const handleAddToFavorites = (episode: Episode) => {
+    addToFavorites(episode); // Add episode to favorites
   };
 
   if (isLoading) {
@@ -120,7 +120,7 @@ const PodcastInfo: React.FC = () => {
                     podcast={podcastData}
                     season={selectedSeason}
                     episode={episode}
-                    onPlay={handleEpisodePlay}
+                    onAddToFavorites={handleAddToFavorites}
                   />
                 ))}
               </div>
